@@ -1,0 +1,29 @@
+{
+  "name": "vk-callback-gateway",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "tunnel": "ssh -p 213 -o \"UserKnownHostsFile=/dev/null\" -o \"StrictHostKeyChecking no\" -N -R \"*:11211:localhost:3000\" publisher@tunnel2.zbc.su #https://tunnel2.zbc.su/",
+    "tunnel:restart": "ssh adminvps  'docker-compose -f /root/containers/tunnel2/docker-compose.yml down; docker-compose -f /root/containers/tunnel2/docker-compose.yml up -d'"
+  },
+  "dependencies": {
+    "next": "14.2.9",
+    "react": "^18",
+    "react-dom": "^18"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.9",
+    "postcss": "^8",
+    "prettier": "^3.3.3",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
+}
