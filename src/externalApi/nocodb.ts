@@ -1,7 +1,7 @@
 import { Api } from "nocodb-sdk";
 import { TableRow, TableRowsData } from "@/types/nocodb.types";
 
-const api = new Api({
+const ncdb = new Api({
   baseURL: "https://ncdb.zbc.su:443",
   headers: {
     "xc-token": process.env.NOCODB_TOKEN,
@@ -9,18 +9,23 @@ const api = new Api({
 });
 
 export const getBases = async () => {
-  const tables = await api.base.list();
-  return tables;
+  return await ncdb.base.list();
 };
 
 export const addRowToTable = async (
   tableId: string,
-  row: TableRow | TableRow[]
+  row: TableRow | TableRow[],
 ) => {
   // const response = await api.dbTableRow.nestedAdd(tableId, row);
-  return await api.dbDataTableRow.create(tableId, row);
+  return await ncdb.dbDataTableRow.create(tableId, row);
 };
 
 export const getTableRows = async (tableId: string) => {
-  return (await api.dbDataTableRow.list(tableId)) as TableRowsData;
+  return (await ncdb.dbDataTableRow.list(tableId)) as TableRowsData;
+};
+
+export const getTableRowById = async (tableId: string, id: number) => {
+  return (await ncdb.dbDataTableRow.list(tableId, {
+    where: "()",
+  })) as TableRowsData;
 };
