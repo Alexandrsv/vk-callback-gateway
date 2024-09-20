@@ -1,3 +1,5 @@
+import { sexDictionary } from "@/constants";
+
 export interface TableRowsData {
   list: TableRow[];
   pageInfo: PageInfo;
@@ -12,9 +14,10 @@ export type TableRowStatus =
 export interface TableRow {
   Id: number;
   Имя?: string;
+  Пол: (typeof sexDictionary)[keyof typeof sexDictionary];
   CreatedAt?: string;
   UpdatedAt?: string;
-  Ссылка_на_профиль?: string;
+  "Ссылка на профиль"?: string;
   Статус: TableRowStatus;
 }
 
