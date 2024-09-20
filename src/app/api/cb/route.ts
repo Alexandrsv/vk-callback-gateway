@@ -1,7 +1,7 @@
 import { type NextRequest } from "next/server";
 import { CallbackEvent } from "@/types/types";
 import { cbConfirmationKeys, tableId } from "@/config";
-import { addRowToTable } from "@/api/nocodb";
+import { addRowToTable } from "@/externalApi/nocodb";
 import { faker } from "@/lib/faker";
 
 export async function POST(request: NextRequest) {
@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
 
   if (body.type === "confirmation") {
     return new Response(
-      cbConfirmationKeys[body.group_id as keyof typeof cbConfirmationKeys],
+      cbConfirmationKeys[body.group_id as keyof typeof cbConfirmationKeys]
     );
   }
 

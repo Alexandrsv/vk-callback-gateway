@@ -15,7 +15,7 @@ export const getBases = async () => {
 
 export const addRowToTable = async (
   tableId: string,
-  row: TableRow | TableRow[],
+  row: TableRow | TableRow[]
 ) => {
   // const response = await api.dbTableRow.nestedAdd(tableId, row);
   return await api.dbDataTableRow.create(tableId, row);
