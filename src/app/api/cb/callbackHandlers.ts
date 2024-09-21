@@ -38,6 +38,7 @@ export const handleGroupJoin = async (
     await addRowToTable(tableId, {
       Статус: "Новичок",
       Пол: sex,
+      Сообщества: groupDictionary[body.group_id as TGroupId],
       "Ссылка на профиль": "https://vk.com/" + user.domain,
       Attachment: attachment,
       Имя: user.first_name + " " + user.last_name,
