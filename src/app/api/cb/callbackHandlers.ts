@@ -1,7 +1,11 @@
 import { NextResponse } from "next/server";
 import { CallbackEvent, GroupJoinEvent } from "@/types/types";
 import { cbConfirmationKeys, tableId } from "@/config";
-import { addRowToTable } from "@/externalApi/nocodb";
+import {
+  addRowToTable,
+  getTableRowById,
+  uploadAvatarByUrl,
+} from "@/externalApi/nocodb";
 import { getVkUserInfo } from "@/externalApi/vk";
 import { sexDictionary } from "@/constants";
 
@@ -19,20 +23,28 @@ export const handleGroupJoin = async (
   body: GroupJoinEvent,
 ): Promise<NextResponse> => {
   const vkResponse = await getVkUserInfo([body.object.user_id]);
-  console.log(JSON.stringify(vkResponse, null, 2));
+  // console.log("vkResponse", JSON.stringify(vkResponse, null, 2));
 
   const user = vkResponse[0];
   const sex = sexDictionary[user.sex];
+  const uid = body.object.user_id.toString();
+
+  const userRow = await getTableRowById(tableId, uid);
+  const attachment = await uploadAvatarByUrl(uid, user.photo_400);
+
+  // console.log("userRow", JSON.stringify(userRow, null, 2));
+  // return handleOkResponse();
 
   const ncdbResponse = await addRowToTable(tableId, {
     Статус: "Новичок",
     Пол: sex,
     "Ссылка на профиль": "https://vk.com/" + user.domain,
+    Attachment: attachment,
     Имя: user.first_name + " " + user.last_name,
     Id: user.id,
   });
 
-  console.log(JSON.stringify(ncdbResponse, null, 2));
+  // console.log("addRowToTable", JSON.stringify(ncdbResponse, null, 2));
   return handleOkResponse();
 };
 
