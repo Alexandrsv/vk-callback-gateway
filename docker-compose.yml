@@ -1,0 +1,21 @@
+
+services:
+  vk-callback-gateway:
+    build:
+      context: .
+    restart: unless-stopped
+    ports:
+      - ${APP_PORT}:3000
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik-default"
+      - "traefik.http.routers.vk-callback-gateway.entrypoints=websecure"
+      - "traefik.http.routers.vk-callback-gateway.rule=Host(`vk-callback-gateway.zbc.su`)"
+      - "traefik.http.routers.vk-callback-gateway.tls=true"
+      - "traefik.http.routers.vk-callback-gateway.tls.certresolver=production"
+    networks:
+      - traefik-default
+
+networks:
+  traefik-default:
+    external: true
