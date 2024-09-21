@@ -12,7 +12,7 @@ import { groupDictionary, sexDictionary, TGroupId } from "@/constants";
 import { UpdateTableRowData } from "@/types/nocodb.types";
 
 export function handleConfirmation(body: CallbackEvent): NextResponse {
-  return NextResponse.json(
+  return new NextResponse(
     cbConfirmationKeys[body.group_id as keyof typeof cbConfirmationKeys],
   );
 }
