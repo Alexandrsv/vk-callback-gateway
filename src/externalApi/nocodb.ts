@@ -37,6 +37,10 @@ export const getTableRows = async (tableId: string) => {
 };
 
 export const getTableRowById = async (tableId: string, uid: string) => {
+  return (await ncdb.dbDataTableRow.read(tableId, uid)) as TableRow;
+};
+
+export const getTableRowsById = async (tableId: string, uid: string) => {
   return (await ncdb.dbDataTableRow.list(tableId, {
     where: `(Id,eq,${uid})`,
   })) as TableRowsData;

@@ -47,13 +47,13 @@ export const handleGroupJoin = async (
     return handleOkResponse();
   }
 
-  const ncdbUser = userRow.list[0];
-
   const publics = Array.from(
-    new Set((ncdbUser.Сообщества || "").split(",")).add(
+    new Set((userRow.Сообщества || "").split(",")).add(
       groupDictionary[body.group_id as TGroupId],
     ),
-  ).join(",");
+  )
+    .filter(Boolean)
+    .join(",");
 
   const newFields: UpdateTableRowData = {
     Id: +uid,
