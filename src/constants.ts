@@ -12,6 +12,7 @@ export const groupDictionary: Record<keyof typeof cbConfirmationKeys, string> =
     2895664: "Научный Иммортализм и Трансгуманизм",
     118918081: "АПС",
     104545950: "Технологии долголетия",
+    223686555: "Александр Савченко",
   };
 
 export type TGroupId = keyof typeof cbConfirmationKeys;
