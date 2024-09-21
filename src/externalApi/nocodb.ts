@@ -3,6 +3,7 @@ import {
   AttachmentByUrlResponse,
   TableRow,
   TableRowsData,
+  UpdateTableRowData,
 } from "@/types/nocodb.types";
 
 const ncdb = new Api({
@@ -20,8 +21,15 @@ export const addRowToTable = async (
   tableId: string,
   row: TableRow | TableRow[],
 ) => {
-  // const response = await api.dbTableRow.nestedAdd(tableId, row);
   return await ncdb.dbDataTableRow.create(tableId, row);
+};
+
+export const updateTableRow = async (
+  tableId: string,
+  uid: string,
+  row: UpdateTableRowData | UpdateTableRowData[],
+) => {
+  return await ncdb.dbDataTableRow.update(tableId, row);
 };
 
 export const getTableRows = async (tableId: string) => {

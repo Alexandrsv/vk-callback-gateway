@@ -15,12 +15,17 @@ export interface TableRow {
   Id: number;
   Имя?: string;
   Пол: (typeof sexDictionary)[keyof typeof sexDictionary];
-  CreatedAt?: string;
-  UpdatedAt?: string;
-  Attachment?: AttachmentByUrlResponse[];
+  Сообщества?: string;
   "Ссылка на профиль"?: string;
   Статус: TableRowStatus;
+  Attachment?: AttachmentByUrlResponse[];
+  CreatedAt?: string;
+  UpdatedAt?: string;
 }
+
+export type UpdateTableRowData = {
+  Id: number;
+} & Partial<TableRow>;
 
 export interface PageInfo {
   totalRows: number;
